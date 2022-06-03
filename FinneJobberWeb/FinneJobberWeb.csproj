@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinneJobber.DataAccess\FinneJobber.DataAccess.csproj" />
+    <ProjectReference Include="..\FinneJobber.Utility\FinneJobber.Utility.csproj" />
   </ItemGroup>
 
 </Project>

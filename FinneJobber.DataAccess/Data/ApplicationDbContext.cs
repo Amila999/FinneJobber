@@ -11,5 +11,6 @@ namespace FinneJobber.DataAccess
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
