@@ -9,6 +9,7 @@ namespace FinneJobber.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         ICategoryRepository Category { get; }
+        IJobRepository Job { get; }
         void Save();
     }
 }
