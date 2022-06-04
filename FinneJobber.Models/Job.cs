@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,6 +29,7 @@ namespace FinneJobber.Models
         public string JobLocation { get; set; }
         [Required]
         [ForeignKey("CategoryId")]
+        [ValidateNever]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
     }

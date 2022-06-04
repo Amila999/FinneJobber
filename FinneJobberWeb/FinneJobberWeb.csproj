@@ -24,4 +24,8 @@
     <ProjectReference Include="..\FinneJobber.Utility\FinneJobber.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\website\" />
+  </ItemGroup>
+
 </Project>
