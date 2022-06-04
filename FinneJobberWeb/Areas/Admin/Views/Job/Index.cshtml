@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Job>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3" align="center">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text">Job List</h2>
+        </div>
+        <div class="col-6">
+            <a asp-controller="Job" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus"></i> &nbsp; Create New Job
+            </a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+<table class="table table-light" style="width:50%" align="center">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>JobLocation</th>
+            <th>Budget</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Time</th>
+            @*<th>JobPoster</th>
+            <th>AppliedSeekers</th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>@obj.Category</td>
+                <td>@obj.JobLocation</td>
+                <td>@obj.Budget</td>
+                <th>@obj.Description</th>
+                <th>@obj.Date</th>
+                <th>@obj.Time</th>
+                @*<th>@obj.JobPoster</th>
+                <th>@obj.ApplieSeekers</th>*@
+                <td width="30%">
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Job" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit</a>
+                        <a asp-controller="Job" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash3-fill"></i> Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

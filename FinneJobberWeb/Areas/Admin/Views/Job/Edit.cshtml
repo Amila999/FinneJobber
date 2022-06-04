@@ -1,0 +1,24 @@
+﻿@model Job
+
+<form method="post" asp-action="Edit">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text">Edit Job</h2>
+            <hr />
+        </div>
+        <div class="mb-3" style="width:40%">
+            <label asp-for="JobLocation"></label>
+            <input asp-for="JobLocation" class="form-control"/>
+            <span asp-validation-for="JobLocation" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="Job" asp-action="Index" class="btn" style="width:fit-content">
+            Back to Job Category List
+        </a>
+    </div>
+</form>
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+}
