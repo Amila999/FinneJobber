@@ -21,4 +21,8 @@
     <ProjectReference Include="..\FinneJobber.Models\FinneJobber.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

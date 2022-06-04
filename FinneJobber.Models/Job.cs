@@ -11,18 +11,24 @@ namespace FinneJobber.Models
     public class Job
     {
         public int Id { get; set; }
+
         [Required]
-        public int CategoryID { get; set; }
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Date")]
+        public DateTime Date { get; set; }
+
         [Required]
-        public string Location { get; set; }
-        [Required]
-        public DateOnly Date { get; set; }
-        [Required]
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public DateTime Time { get; set; }
         public string Description { get; set; }
         [Required]
         public double Budget { get; set; }
+        [Required]
+        public string JobLocation { get; set; }
+        [Required]
+        [ForeignKey("CategoryId")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
