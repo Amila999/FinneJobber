@@ -4,6 +4,7 @@ using FinneJobber.DataAccess;
 using FinneJobber.Models;
 using FinneJobber.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using FinneJobber.Models.ViewModels;
 
 namespace FinneJobberWeb.Areas.Admin.Controllers;
 [Area("Admin")]
@@ -25,25 +26,27 @@ public class JobController : Controller
     //Get
     public IActionResult Upsert(int? id)
     {
-        Job job = new();
-        IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(
-            u=>new SelectListItem 
+        JobVM jobVM = new()
+        {
+            Job = new(),
+            CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
             {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            });
+                Text = i.Name,
+                Value = i.Id.ToString(),
+            }),
+        };
+        
         if (id == null || id == 0)
         {
             //Create Product
-            ViewBag.CategoryList = CategoryList;
-            return View(job);
+            return View(jobVM);
         }
         else 
         {
             //update product
         }
         
-        return View();
+        return View(jobVM);
     }
     //Post
     [HttpPost]
