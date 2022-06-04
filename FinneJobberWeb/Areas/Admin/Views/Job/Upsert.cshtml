@@ -1,0 +1,51 @@
+﻿@model Job
+
+<form method="post" asp-action="Upsert">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text">Edit Job</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
+                <option disabled selected>--Select Job Category--</option>
+                </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="JobLocation"></label>
+            <input asp-for="JobLocation" class="form-control"/>
+            <span asp-validation-for="JobLocation" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Budget"></label>
+            <input asp-for="Budget" class="form-control"/>
+            <span asp-validation-for="Budget" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Date"></label>
+            <input asp-for="Date" class="form-control"/>
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Time"></label>
+            <input asp-for="Time" class="form-control"/>
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="Job" asp-action="Index" class="btn" style="width:fit-content">
+            Back to Job List
+        </a>
+    </div>
+</form>
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+}

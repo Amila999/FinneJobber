@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using FinneJobber.DataAccess;
 using FinneJobber.Models;
 using FinneJobber.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinneJobberWeb.Areas.Admin.Controllers;
 [Area("Admin")]
@@ -20,44 +21,35 @@ public class JobController : Controller
         IEnumerable<Job> objJobList = _unitOfWork.Job.GetAll();
         return View(objJobList);
     }
+    
     //Get
-    public IActionResult Create()
+    public IActionResult Upsert(int? id)
     {
-        return View();
-    }
-    //Post
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(Job obj)
-    {
-        if (ModelState.IsValid)
+        Job job = new();
+        IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select( 
+        u=> new SelectListItem 
         {
-            _unitOfWork.Job.Add(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Job created successfully";
-            return RedirectToAction("Index");
-        }
-        return View(obj);
-    }
-
-    //Get
-    public IActionResult Edit(int? id)
-    {
+            Text=u.Name,
+            Value=u.Id.ToString()
+        });
         if (id == null || id == 0)
         {
-            return NotFound();
+            //create product
+            ViewBag.CategoryList = CategoryList;
+            return View(job);
+
         }
-        var jobFromDbFirst = _unitOfWork.Job.GetFirstOrDefault(u => u.Id == id);
-        if (jobFromDbFirst == null)
+        else 
         {
-            return NotFound();
+            //update product
         }
-        return View(jobFromDbFirst);
+        
+        return View(job);
     }
     //Post
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(Job obj)
+    public IActionResult Upsert(Job obj)
     {
         if (ModelState.IsValid)
         {
