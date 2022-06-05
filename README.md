@@ -1,0 +1,2 @@
+# FinneJobber
+When people move to new places, it is difficult to find jobs quickly. Until they find a perfect job which match their qualifications and skills, their time is unutilized to generate income. Even though there are plenty of small jobs available, the lack of facilities to connect job seekers and jobs easily is an issue. This application will focus to be the bridge between part-time job seekers and jobs. This will help many future students and peoples who are interested in using their free time to ease the financial battle.
