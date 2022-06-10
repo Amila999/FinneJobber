@@ -22,14 +22,13 @@ namespace FinneJobber.DataAccess.Repository
             var objFromDb = _db.Jobs.FirstOrDefault(u=>u.Id==obj.Id);
             if (objFromDb != null) 
             {
-                obj.JobLocation = objFromDb.JobLocation;
-                obj.Budget = objFromDb.Budget;
-                obj.Date = objFromDb.Date;
-                obj.Time = objFromDb.Time;
-                obj.Description = objFromDb.Description;
-                obj.CategoryId = objFromDb.CategoryId;
-                obj.Category = objFromDb.Category;
-
+                objFromDb.JobLocation = obj.JobLocation;
+                objFromDb.Budget = obj.Budget;
+                objFromDb.Date = obj.Date;
+                objFromDb.Time = obj.Time;
+                objFromDb.Description = obj.Description;
+                objFromDb.CategoryId = obj.CategoryId;
+                objFromDb.Category = obj.Category;
             }
         }
     }
