@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\JobPoster\Controllers\" />
     <Folder Include="wwwroot\images\website\" />
   </ItemGroup>
 
