@@ -27,8 +27,8 @@ namespace FinneJobber.DataAccess.Repository
                 obj.Date = objFromDb.Date;
                 obj.Time = objFromDb.Time;
                 obj.Description = objFromDb.Description;
-                obj.CategoryId = obj.CategoryId;
-                obj.Category = obj.Category;
+                obj.CategoryId = objFromDb.CategoryId;
+                obj.Category = objFromDb.Category;
 
             }
         }
