@@ -12,7 +12,7 @@ namespace FinneJobber.Models
         [DisplayName("Display Order")]
         [Range(1, 100)]
         public int DisplayOrder { get; set; }
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
     }
 }

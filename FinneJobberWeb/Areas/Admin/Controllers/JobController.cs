@@ -45,7 +45,6 @@ public class JobController : Controller
         {
             //update product
         }
-        
         return View(jobVM);
     }
     //Post
