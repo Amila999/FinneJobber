@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace FinneJobber.DataAccess.Repository.IRepository
 {
-    public interface IJobRepository:IRepository<Job>
+    public interface ICategoryRepository : IRepository<Category>
     {
-        void Update(Job obj);
+        void Update(Category obj);
     }
 }

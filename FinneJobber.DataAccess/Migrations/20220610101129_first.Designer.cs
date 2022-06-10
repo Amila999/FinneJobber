@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinneJobber.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220604024000_first")]
+    [Migration("20220610101129_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
