@@ -54,9 +54,9 @@ public class JobController : Controller
     {
         if (ModelState.IsValid)
         {
-            //_unitOfWork.Job.Update(obj);
+            _unitOfWork.Job.Add(obj.Job);
             _unitOfWork.Save();
-            TempData["success"] = "Job updated successfully";
+            TempData["success"] = "Job created successfully";
             return RedirectToAction("Index");
         }
         return View(obj);

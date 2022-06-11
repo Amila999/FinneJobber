@@ -28,9 +28,9 @@ namespace FinneJobber.Models
         [Required]
         public string JobLocation { get; set; }
         [Required]
+        public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [ValidateNever]
-        public int CategoryId { get; set; }
         public Category Category { get; set; }
     }
 }
