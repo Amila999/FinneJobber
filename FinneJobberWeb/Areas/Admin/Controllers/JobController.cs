@@ -50,11 +50,11 @@ public class JobController : Controller
     //Post
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Upsert(Job obj)
+    public IActionResult Upsert(JobVM obj)
     {
         if (ModelState.IsValid)
         {
-            _unitOfWork.Job.Update(obj);
+            //_unitOfWork.Job.Update(obj);
             _unitOfWork.Save();
             TempData["success"] = "Job updated successfully";
             return RedirectToAction("Index");

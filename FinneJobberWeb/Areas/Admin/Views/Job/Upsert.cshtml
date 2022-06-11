@@ -7,7 +7,7 @@
             <hr />
         </div>
         <div class="mb-3">
-            <label asp-for="Job.CategoryId"></label>
+            <label asp-for="Job.CategoryId">Category</label>
             <select asp-for="Job.CategoryId" asp-items="@Model.CategoryList" class="form-select">
                 <option disabled selected>--Select Job Category--</option>
                 </select>
