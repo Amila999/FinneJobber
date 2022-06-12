@@ -10,9 +10,12 @@ namespace FinneJobberWeb.Areas.Admin.Controllers;
 public class CategoryController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
-    public CategoryController(IUnitOfWork unitOfWork)
+    private readonly IWebHostEnvironment _hostEnvironment;
+
+    public CategoryController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
     {
         _unitOfWork = unitOfWork;
+        _hostEnvironment = hostEnvironment;
     }
 
     public IActionResult Index()
@@ -28,14 +31,23 @@ public class CategoryController : Controller
     //Post
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Category obj)
+    public IActionResult Create(Category obj, IFormFile? file)
     {
-        if (obj.Name == obj.DisplayOrder.ToString())
-        {
-            ModelState.AddModelError("name", "The Display Order can't exactly match the Name");
-        }
         if (ModelState.IsValid)
         {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            if (file != null) 
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var upload = Path.Combine(wwwRootPath, @"images\category");
+                var extention = Path.GetExtension(file.FileName);
+                using (var fileStreams = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create)) 
+                {
+                    file.CopyTo(fileStreams);
+                }
+                obj.ImageUrl = @"\images\category\"+fileName+extention;
+            }
+
             _unitOfWork.Category.Add(obj);
             _unitOfWork.Save();
             TempData["success"] = "Category created successfully";
@@ -61,7 +73,7 @@ public class CategoryController : Controller
     //Post
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(Category obj)
+    public IActionResult Edit(Category obj, IFormFile file)
     {
         if (obj.Name == obj.DisplayOrder.ToString())
         {
