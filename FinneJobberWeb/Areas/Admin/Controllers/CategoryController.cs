@@ -20,8 +20,7 @@ public class CategoryController : Controller
 
     public IActionResult Index()
     {
-        IEnumerable<Category> objCategoryList = _unitOfWork.Category.GetAll();
-        return View(objCategoryList);
+        return View();
     }
     //Get
     public IActionResult Create()
@@ -118,4 +117,12 @@ public class CategoryController : Controller
         TempData["success"] = "Category deleted successfully";
         return RedirectToAction("Index");
     }
+    #region API CALLS
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var productList = _unitOfWork.Category.GetAll();
+        return Json(new { data = productList });
+    }
+    #endregion
 }
