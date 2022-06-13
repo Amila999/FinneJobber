@@ -37,14 +37,16 @@ public class JobController : Controller
         
         if (id == null || id == 0)
         {
-            //Create Product
+            //Create job
             return View(jobVM);
         }
         else 
         {
-            //update product
+            jobVM.Job = _unitOfWork.Job.GetFirstOrDefault(u => u.Id == id);
+            return View(jobVM);
+            //update job
         }
-        return View(jobVM);
+        
     }
     //Post
     [HttpPost]
