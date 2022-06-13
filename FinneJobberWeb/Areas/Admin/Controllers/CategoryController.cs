@@ -121,8 +121,8 @@ public class CategoryController : Controller
     [HttpGet]
     public IActionResult GetAll()
     {
-        var productList = _unitOfWork.Category.GetAll();
-        return Json(new { data = productList });
+        var categoryList = _unitOfWork.Category.GetAll();
+        return Json(new { data = categoryList });
     }
     #endregion
 }

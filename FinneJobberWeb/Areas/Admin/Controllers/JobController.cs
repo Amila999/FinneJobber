@@ -19,8 +19,7 @@ public class JobController : Controller
 
     public IActionResult Index()
     {
-        IEnumerable<Job> objJobList = _unitOfWork.Job.GetAll();
-        return View(objJobList);
+        return View();
     }
 
     //Get
@@ -91,4 +90,12 @@ public class JobController : Controller
         TempData["success"] = "Job deleted successfully";
         return RedirectToAction("Index");
     }
+    #region API CALLS
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var jobList = _unitOfWork.Job.GetAll();
+        return Json(new { data = jobList });
+    }
+    #endregion
 }

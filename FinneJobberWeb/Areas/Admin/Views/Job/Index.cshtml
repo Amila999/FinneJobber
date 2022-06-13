@@ -12,19 +12,23 @@
     <br />
     <br />
 
-<table class="table table-light" style="width:70%" align="center">
+<table id="tblData" class="table table-light" style="width:70%" align="center">
     <thead>
         <tr>
             <th>Category</th>
-            <th>Job Location</th>
-            <th>Budget</th>
             <th>Description</th>
+            <th>Job Location</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Budget</th>
             <th>JobPoster</th>
             <th>Applied JobSeekers</th>
-            <th></th>
+            @*<th></th>*@
         </tr>
     </thead>
 </table>
 </div>
+@section Scripts
+{
+    <script src="~/js/job.js"></script>
+}
