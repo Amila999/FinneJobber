@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using FinneJobber.DataAccess;
 using FinneJobber.Models;
 using FinneJobber.DataAccess.Repository.IRepository;
+using FinneJobber.Models.ViewModels;
 
 namespace FinneJobberWeb.Areas.Admin.Controllers;
 [Area("Admin")]
@@ -23,14 +24,28 @@ public class CategoryController : Controller
         return View();
     }
     //Get
-    public IActionResult Create()
+    public IActionResult Upsert(int? id)
     {
-        return View();
+        CategoryVM categoryVM = new() 
+        {
+            Category = new(),
+        };
+        if (id == null || id == 0)
+        {
+            //Create Category
+            return View(categoryVM);
+        }
+        else
+        {
+            categoryVM.Category = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            return View(categoryVM);
+            //update job
+        }
     }
     //Post
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Category obj, IFormFile? file)
+    public IActionResult Upsert(CategoryVM obj, IFormFile? file)
     {
         if (ModelState.IsValid)
         {
@@ -44,43 +59,10 @@ public class CategoryController : Controller
                 {
                     file.CopyTo(fileStreams);
                 }
-                obj.ImageUrl = @"\images\category\"+fileName+extention;
+                obj.Category.ImageUrl = @"\images\category\"+fileName+extention;
             }
 
-            _unitOfWork.Category.Add(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Category created successfully";
-            return RedirectToAction("Index");
-        }
-        return View(obj);
-    }
-
-    //Get
-    public IActionResult Edit(int? id)
-    {
-        if (id == null || id == 0)
-        {
-            return NotFound();
-        }
-        var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
-        if (categoryFromDbFirst == null)
-        {
-            return NotFound();
-        }
-        return View(categoryFromDbFirst);
-    }
-    //Post
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Edit(Category obj, IFormFile file)
-    {
-        if (obj.Name == obj.DisplayOrder.ToString())
-        {
-            ModelState.AddModelError("name", "The Display Order can't exactly match the Name");
-        }
-        if (ModelState.IsValid)
-        {
-            _unitOfWork.Category.Update(obj);
+            _unitOfWork.Category.Add(obj.Category);
             _unitOfWork.Save();
             TempData["success"] = "Category updated successfully";
             return RedirectToAction("Index");
