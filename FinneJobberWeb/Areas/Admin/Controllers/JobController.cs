@@ -94,7 +94,7 @@ public class JobController : Controller
     [HttpGet]
     public IActionResult GetAll()
     {
-        var jobList = _unitOfWork.Job.GetAll();
+        var jobList = _unitOfWork.Job.GetAll(includeProperties: "Category");
         return Json(new { data = jobList });
     }
     #endregion

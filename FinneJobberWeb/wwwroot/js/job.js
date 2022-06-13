@@ -10,7 +10,7 @@ function loadDataTable() {
             "url": "/Admin/Job/GetAll"
         },
         "columns": [
-            { "data": "category", "width": "15%" },
+            { "data": "category.name", "width": "15%" },
             { "data": "description", "width": "15%" },
             { "data": "jobLocation", "width": "15%" },
             { "data": "date", "width": "15%" },
