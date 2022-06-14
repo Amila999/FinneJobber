@@ -71,41 +71,25 @@ public class JobController : Controller
         return View(obj);
     }
 
-    //Get
-    public IActionResult Delete(int? id)
-    {
-        if (id == null || id == 0)
-        {
-            return NotFound();
-        }
-        var jobFromDbFirst = _unitOfWork.Job.GetFirstOrDefault(u => u.Id == id);
-        if (jobFromDbFirst == null)
-        {
-            return NotFound();
-        }
-        return View(jobFromDbFirst);
-    }
-    //Post
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public IActionResult DeletePOST(int? id)
-    {
-        var obj = _unitOfWork.Job.GetFirstOrDefault(u => u.Id == id);
-        if (obj == null)
-        {
-            return NotFound();
-        }
-        _unitOfWork.Job.Remove(obj);
-        _unitOfWork.Save();
-        TempData["success"] = "Job deleted successfully";
-        return RedirectToAction("Index");
-    }
     #region API CALLS
     [HttpGet]
     public IActionResult GetAll()
     {
         var jobList = _unitOfWork.Job.GetAll(includeProperties: "Category");
         return Json(new { data = jobList });
+    }
+    //Post
+    [HttpDelete]
+    public IActionResult Delete(int? id)
+    {
+        var obj = _unitOfWork.Job.GetFirstOrDefault(u => u.Id == id);
+        if (obj == null)
+        {
+            return Json(new { success = false, message = "Error while deleting" });
+        }
+        _unitOfWork.Job.Remove(obj);
+        _unitOfWork.Save();
+        return Json(new { success = true, message = "Delete successful" });
     }
     #endregion
 }

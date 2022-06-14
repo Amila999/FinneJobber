@@ -85,42 +85,33 @@ public class CategoryController : Controller
         }
         return View(obj);
     }
-
-    //Get
-    public IActionResult Delete(int? id)
-    {
-        if (id == null || id == 0)
-        {
-            return NotFound();
-        }
-        var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
-        if (categoryFromDbFirst == null)
-        {
-            return NotFound();
-        }
-        return View(categoryFromDbFirst);
-    }
-    //Post
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public IActionResult DeletePOST(int? id)
-    {
-        var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
-        if (obj == null)
-        {
-            return NotFound();
-        }
-        _unitOfWork.Category.Remove(obj);
-        _unitOfWork.Save();
-        TempData["success"] = "Category deleted successfully";
-        return RedirectToAction("Index");
-    }
+    
     #region API CALLS
     [HttpGet]
     public IActionResult GetAll()
     {
         var categoryList = _unitOfWork.Category.GetAll();
         return Json(new { data = categoryList });
+    }
+    //Post
+    [HttpDelete]
+    [ValidateAntiForgeryToken]
+    public IActionResult Delete(int? id)
+    {
+        var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+        if (obj == null)
+        {
+            return Json(new { success=false,message="Error while deleting"});
+        }
+
+        var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+        if (System.IO.File.Exists(oldImagePath))
+        {
+            System.IO.File.Delete(oldImagePath);
+        }
+        _unitOfWork.Category.Remove(obj);
+        _unitOfWork.Save();
+        return Json(new { success = true, message = "Delete successful" });
     }
     #endregion
 }
