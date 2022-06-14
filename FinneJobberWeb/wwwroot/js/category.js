@@ -12,7 +12,13 @@ function loadDataTable() {
         "columns": [
             { "data": "name", "width":"15%"},
             { "data": "displayOrder", "width": "15%" },
-            { "data": "imageUrl", "width": "15%" },
+            {
+                "data": "imageUrl",
+                "render": function (data) {
+                    return '<img height="75%" width="75%" src="' + data + '">'
+                },
+                "width": "15%"
+            },
             {
                 "data": "id",
                 "render": function (data) {
