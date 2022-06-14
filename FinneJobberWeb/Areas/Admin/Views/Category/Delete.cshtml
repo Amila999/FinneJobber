@@ -4,65 +4,9 @@
     <input asp-for="Category.Id" hidden/>
     <input asp-for="Category.ImageUrl" hidden/>
     
-    <div class="row" align="center">
-        <div class="col-12">
-            <div class="border p-3 mt-4 row col-10">
-                <div class="col-12 pb-2">
-                    <h2 class="text"> @(Model.Category.Id !=0 ? "Update":"Create") Category</h2>
-                    <hr />
-                </div>
-                <div class="mb-3 col-6">
-                    <label asp-for="Category.Name"></label>
-                    <input asp-for="Category.Name" class="form-control"/>
-                    <span asp-validation-for="Category.Name" class="text-danger"></span>
-                </div>
-                <div class="mb-3 col-6">
-                    <label asp-for="Category.DisplayOrder"></label>
-                    <input asp-for="Category.DisplayOrder" class="form-control"/>
-                    <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
-                </div>
-                <div class="mb-3 col-12">
-                    <label asp-for="Category.ImageUrl"></label>
-                    <input type="file" id="uploadBox" name="file" class="form-control"/>
-                </div>
-                <div class="mb-3 col-12" align="center">
-                    <img src="@Model.Category.ImageUrl"
-                    width="150" style="border-radius:5px border:1px solid #bbb9b9"/>
-                </div>
-                <div class="col-12">
-                    @if (Model.Category.Id != 0) 
-                    {
-                        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-                    }
-                    else
-                    {
-                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
-                    }
-                    <a asp-controller="Category" asp-action="Index" class="btn" style="width:fit-content">
-                        Back to Job Category List
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
 </form>
 @section Scripts{
     @{
             <partial name="_ValidationScriptsPartial"></partial>
     }
-    <script>
-        function ValidateInput() {
-            if (document.getElementById("uploadBox").value == "")
-            {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Please upload an Image!',
-                });
-                return false;
-            }
-            return true;
-        }
-    </script>
 }

@@ -2,48 +2,7 @@
 
 <form method="post" asp-action="Delete">
     <input asp-for="Job.Id" hidden/>
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text">@(Model.Job.Id!=0?"Update":"Create") Job</h2>
-            <hr />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Job.CategoryId">Category</label>
-            <select asp-for="Job.CategoryId" asp-items="@Model.CategoryList" class="form-select">
-                <option disabled selected>--Select Job Category--</option>
-                </select>
-            <span asp-validation-for="Job.CategoryId" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Job.JobLocation"></label>
-            <input asp-for="Job.JobLocation" class="form-control"/>
-            <span asp-validation-for="Job.JobLocation" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Job.Budget"></label>
-            <input asp-for="Job.Budget" class="form-control"/>
-            <span asp-validation-for="Job.Budget" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Job.Description"></label>
-            <textarea asp-for="Job.Description" rows="3" class="form-control"></textarea>
-            <span asp-validation-for="Job.Description" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Job.Date"></label>
-            <input asp-for="Job.Date" class="form-control"/>
-            <span asp-validation-for="Job.Date" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Job.Time"></label>
-            <input asp-for="Job.Time" class="form-control"/>
-            <span asp-validation-for="Job.Time" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">@(Model.Job.Id!=0?"Update":"Create")</button>
-        <a asp-controller="Job" asp-action="Index" class="btn" style="width:fit-content">
-            Back to Job List
-        </a>
-    </div>
+
 </form>
 @section Scripts{
 @{

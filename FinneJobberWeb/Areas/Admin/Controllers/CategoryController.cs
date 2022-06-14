@@ -74,13 +74,14 @@ public class CategoryController : Controller
             if (obj.Category.Id == 0)
             {
                 _unitOfWork.Category.Add(obj.Category);
+                TempData["success"] = "Category created successfully";
             }
             else 
             {
                 _unitOfWork.Category.Update(obj.Category);
+                TempData["success"] = "Category updated successfully";
             }
             _unitOfWork.Save();
-            TempData["success"] = "Category updated successfully";
             return RedirectToAction("Index");
         }
         return View(obj);

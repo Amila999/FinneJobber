@@ -58,14 +58,15 @@ public class JobController : Controller
             if (obj.Job.Id == 0)
             {
                 _unitOfWork.Job.Add(obj.Job);
+                TempData["success"] = "Job created successfully";
             }
             else
             {
                 _unitOfWork.Job.Update(obj.Job);
+                TempData["success"] = "Job updated successfully";
             }
             
             _unitOfWork.Save();
-            TempData["success"] = "Job created successfully";
             return RedirectToAction("Index");
         }
         return View(obj);
