@@ -55,14 +55,30 @@ public class CategoryController : Controller
                 string fileName = Guid.NewGuid().ToString();
                 var upload = Path.Combine(wwwRootPath, @"images\category");
                 var extention = Path.GetExtension(file.FileName);
+
+                if (obj.Category.ImageUrl != null) 
+                {
+                    var oldImagePath = Path.Combine(wwwRootPath, obj.Category.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath)) 
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
                 using (var fileStreams = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create)) 
                 {
                     file.CopyTo(fileStreams);
                 }
                 obj.Category.ImageUrl = @"\images\category\"+fileName+extention;
             }
-
-            _unitOfWork.Category.Add(obj.Category);
+            if (obj.Category.Id == 0)
+            {
+                _unitOfWork.Category.Add(obj.Category);
+            }
+            else 
+            {
+                _unitOfWork.Category.Update(obj.Category);
+            }
             _unitOfWork.Save();
             TempData["success"] = "Category updated successfully";
             return RedirectToAction("Index");

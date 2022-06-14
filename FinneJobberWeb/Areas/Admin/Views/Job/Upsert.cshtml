@@ -1,6 +1,7 @@
 ﻿@model FinneJobber.Models.ViewModels.JobVM
 
 <form method="post" asp-action="Upsert">
+    <input asp-for="Job.Id" hidden/>
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text">@(Model.Job.Id!=0?"Update":"Create") Job</h2>
