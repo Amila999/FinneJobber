@@ -95,7 +95,6 @@ public class CategoryController : Controller
     }
     //Post
     [HttpDelete]
-    [ValidateAntiForgeryToken]
     public IActionResult Delete(int? id)
     {
         var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);

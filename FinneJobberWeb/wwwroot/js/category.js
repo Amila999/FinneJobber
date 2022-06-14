@@ -20,7 +20,7 @@ function loadDataTable() {
                         <div class="w-75 btn-group" role="group">
                             <a href="/Admin/Category/Upsert?id=${data}"
                                 class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit</a>
-                            <a onClick=Delete('/Admin/Categoty/Delete?id=${data}')
+                            <a onClick=Delete('/Admin/Category/Delete?id=${data}')
                                 class="btn btn-danger mx-2"><i class="bi bi-trash3-fill"></i> Delete</a>
                         </div>
 
