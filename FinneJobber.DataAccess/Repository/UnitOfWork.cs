@@ -15,9 +15,13 @@ namespace FinneJobber.DataAccess.Repository
             _db = db;
             Category = new CategoryRepository(_db);
             Job = new JobRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
+            JobCart = new JobCartRepository(_db);
         }
         public ICategoryRepository Category { get; private set; }
         public IJobRepository Job { get; private set;}
+        public IJobCartRepository JobCart { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
         public void Save()
         {
              _db.SaveChanges();

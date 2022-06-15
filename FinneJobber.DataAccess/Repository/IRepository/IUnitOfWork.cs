@@ -10,6 +10,8 @@ namespace FinneJobber.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IJobRepository Job { get; }
+        IJobCartRepository JobCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }
