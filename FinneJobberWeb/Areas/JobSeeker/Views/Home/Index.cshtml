@@ -1,4 +1,31 @@
-﻿@model IEnumerable<Job>
+﻿<div class="container p-3" align="center">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text">Available Job List</h2>
+        </div>
+    </div>
+    <br />
+    <br />
+
+<table id="tblData" class="table table-light" style="width:70%" align="center">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Job</th>
+            <th>Description</th>
+            @*<th>JobPoster</th>
+            <th>Applied JobSeekers</th>*@
+            <th></th>
+        </tr>
+    </thead>
+</table>
+</div>
+@section Scripts
+{
+    <script src="~/js/jobApply.js"></script>
+}
+
+@*@model IEnumerable<Job>
 
 <div class="row pb-3">
     @foreach (var job in Model)
@@ -39,6 +66,7 @@
                             </div>
                         </div> 
                     </div>
+                    
                     <div>
                         <a asp-action="Apply" class="btn btn-primary form-control" asp-route-id="@job.Id">Apply</a>
                     </div>
@@ -46,4 +74,4 @@
             </div>
         </div>
     }
-</div>
+</div>*@

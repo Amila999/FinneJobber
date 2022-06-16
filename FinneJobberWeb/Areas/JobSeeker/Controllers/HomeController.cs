@@ -1,5 +1,6 @@
 ﻿using FinneJobber.DataAccess.Repository.IRepository;
 using FinneJobber.Models;
+using FinneJobber.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -20,8 +21,7 @@ public class HomeController : Controller
         }
     public IActionResult Index()
         {
-            IEnumerable<Job> jobList = _unitOfWork.Job.GetAll(includeProperties:"Category");
-            return View(jobList);
+            return View();
         }
     public IActionResult Privacy()
         {
@@ -33,25 +33,29 @@ public class HomeController : Controller
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+    #region API CALLS
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var jobList = _unitOfWork.Job.GetAll(includeProperties: "Category");
+        return Json(new { data = jobList });
+    }
     //Post
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Authorize]
     public IActionResult Apply(int id)
     {
-        JobCart jobCart = new() { };
-
-        if (jobCart == null)
-        {
-            return Json(new { success = false, message = "Error while applying" });
-        }
+        JobCart jobCart = new();
         jobCart.JobId = id;
+
         var claimsIdentity = (ClaimsIdentity)User.Identity;
         var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
         jobCart.ApplicationUserId = claim.Value;
 
         _unitOfWork.JobCart.Add(jobCart);
         _unitOfWork.Save();
-        return RedirectToAction("Index");
+        return Json(new { success = true, message = "Delete successful" });
     }
+    #endregion
 }
