@@ -19,5 +19,6 @@ namespace FinneJobber.Models
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+        public bool IsApplied { get; set; }
     }
 }

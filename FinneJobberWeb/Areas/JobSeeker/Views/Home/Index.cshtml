@@ -1,35 +1,8 @@
-﻿<div class="container p-3" align="center">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text">Available Job List</h2>
-        </div>
-    </div>
-    <br />
-    <br />
-
-<table id="tblData" class="table table-light" style="width:70%" align="center">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Description</th>
-            <th>Location</th>
-            <th>Budget</th>
-            <th>Date</th>
-            <th>Time</th>
-            @*<th>JobPoster</th>
-            <th>Applied JobSeekers</th>*@
-            <th></th>
-        </tr>
-    </thead>
-</table>
+﻿@model IEnumerable<Job>
+<div class="col-12 pb-2" align="center">
+    <h1 class="text">Available Jobs</h1>
+    <hr />
 </div>
-@section Scripts
-{
-    <script src="~/js/jobApply.js"></script>
-}
-
-@*@model IEnumerable<Job>
-
 <div class="row pb-3">
     @foreach (var job in Model)
     {
@@ -37,17 +10,18 @@
             <div class="row p-2">
                 <div class="col-12 p-1" style="border:1px solid #008cba; border-radius:5px;">
                     <div class="card">
+                        <div class="card-header text-light ml-0  row ">
+                            <div class="col-12 text-center">
+                                <h2 class="text-primary">@job.Category.Name</h2>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-6 pt-4">
                                 <img src="@job.Category.ImageUrl" class="card-img-top rounded"/>
                             </div>
                             <div class="col-6">
                                 <div class="card-body">
                                     <div class="pl-1">
-                                        <p class="card-title h4 text-primary">@job.Category.Name</p>
-                                    </div>
-                                    <div class="pl-1">
-                                        <p class="card-title text-info">@job.Description</p>
                                         <p class="card-title h5 text-primary">
                                             <i class="bi bi-geo-alt-fill" style="color:red"></i>
                                             @job.JobLocation
@@ -69,12 +43,12 @@
                             </div>
                         </div> 
                     </div>
-                    
-                    <div>
-                        <a asp-action="Apply" class="btn btn-primary form-control" asp-route-id="@job.Id">Apply</a>
+                    <br/>
+                    <div class="column" align="center">
+                        <a asp-action="Details"  class="btn btn-primary form-control" asp-route-jobId="@job.Id" style="width:150px">Details</a>
                     </div>
                 </div>
             </div>
         </div>
     }
-</div>*@
+</div>

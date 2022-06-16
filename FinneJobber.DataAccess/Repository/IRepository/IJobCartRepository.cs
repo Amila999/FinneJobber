@@ -10,5 +10,7 @@ namespace FinneJobber.DataAccess.Repository.IRepository
 {
     public interface IJobCartRepository : IRepository<JobCart>
     {
+        bool makeApplied(JobCart jobCart, bool isApplied);
+        bool cancelApplied(JobCart jobCart, bool isApplied);
     }
 }

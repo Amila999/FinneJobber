@@ -16,5 +16,17 @@ namespace FinneJobber.DataAccess.Repository
             _db = db;
 
         }
+
+        public bool cancelApplied(JobCart jobCart, bool isApplied)
+        {
+            jobCart.IsApplied = false;
+            return jobCart.IsApplied;
+        }
+
+        public bool makeApplied(JobCart jobCart, bool isApplied)
+        {
+            jobCart.IsApplied = true;
+            return jobCart.IsApplied;
+        }
     }
 }
