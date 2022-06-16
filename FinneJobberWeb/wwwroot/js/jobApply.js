@@ -16,7 +16,7 @@ function loadDataTable() {
                         <div class="card">
                             <div class="col-12">
                                 <div class="row">
-                                    <img src="${data.imageUrl}" class="card-img-top rounded"/>
+                                    <img height="25%" width="25%" src="${data.imageUrl}" class="card-img-top rounded"/>
                                 </div>
                                 <div class="card-body" align="center">
                                     <div class="pl-1">
@@ -28,8 +28,10 @@ function loadDataTable() {
                 }, "width": "10%"
             },
             { "data": "description", "width": "15%" },
-            { "data": "description", "width": "15%" },
-        
+            { "data": "jobLocation", "width": "15%" },
+            { "data": "budget", "width": "15%" },
+            { "data": "date", "width": "15%" },
+            { "data": "time", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
