@@ -16,7 +16,7 @@ namespace FinneJobber.DataAccess.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            _db.Jobs.Include(u => u.Category);
+            //_db.JobCarts.Include(u => u.Category);
             this.dbSet = _db.Set<T>();
         }
         public void Add(T entity)
@@ -24,9 +24,13 @@ namespace FinneJobber.DataAccess.Repository
             dbSet.Add(entity);
         }
         //IncludeProp - "Category"
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (filter != null) 
+            { 
+                query = query.Where(filter);
+            }
             if (includeProperties != null) 
             {
                 foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) 
